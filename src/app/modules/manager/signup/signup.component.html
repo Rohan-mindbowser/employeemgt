@@ -1,1 +1,106 @@
-<p>signup works!</p>
+<div class="signup_container">
+  <div class="signup_content">
+    <form style="width: 100%" [formGroup]="formGroup">
+      <div class="form_heading">
+        <p>Signup Here</p>
+      </div>
+      <div class="form_container">
+        <div class="form_field mb-3">
+          <label for="firstname">First Name</label>
+          <input type="text" name="firstname" formControlName="firstname" />
+          <span
+            style="color: red"
+            *ngIf="
+              formGroup.get('firstname')!.hasError('required') &&
+              formGroup.get('firstname')!.touched
+            "
+            >Firstname is required</span
+          >
+        </div>
+        <div class="form_field mb-3">
+          <label for="lastname">Last Name</label>
+          <input type="text" name="lastname" formControlName="lastname" />
+          <span
+            style="color: red"
+            *ngIf="
+              formGroup.get('lastname')!.hasError('required') &&
+              formGroup.get('lastname')!.touched
+            "
+            >Lastname is required</span
+          >
+        </div>
+        <div class="form_field mb-3">
+          <label for="email">Email</label>
+          <input type="text" name="email" formControlName="email" />
+          <span
+            style="color: red"
+            *ngIf="
+              formGroup.get('email')!.hasError('required') &&
+              formGroup.get('email')!.touched
+            "
+            >Email is required</span
+          >
+        </div>
+        <div class="form_field mb-3">
+          <label for="firstname">Password</label>
+          <input type="password" name="password" formControlName="password" />
+          <span
+            style="color: red"
+            *ngIf="
+              formGroup.get('password')!.hasError('required') &&
+              formGroup.get('password')!.touched
+            "
+            >Password is required</span
+          >
+        </div>
+        <div class="form_field mb-3">
+          <label for="address">Address</label>
+          <input type="text" name="address" formControlName="address" />
+          <span
+            style="color: red"
+            *ngIf="
+              formGroup.get('address')!.hasError('required') &&
+              formGroup.get('address')!.touched
+            "
+            >Address is required</span
+          >
+        </div>
+        <div class="form_field mb-3">
+          <label for="dob">Date of Birth</label>
+          <input type="date" name="dob" formControlName="dob" />
+          <span
+            style="color: red"
+            *ngIf="
+              formGroup.get('dob')!.hasError('required') &&
+              formGroup.get('dob')!.touched
+            "
+            >Dob is required</span
+          >
+        </div>
+        <div class="form_field mb-3">
+          <label for="company">Company</label>
+          <input type="text" name="company" formControlName="company" />
+          <span
+            style="color: red"
+            *ngIf="
+              formGroup.get('company')!.hasError('required') &&
+              formGroup.get('company')!.touched
+            "
+            >Company is required</span
+          >
+        </div>
+      </div>
+      <div class="signup_btn my-3">
+        <button
+          class="custome_btn"
+          [disabled]="!formGroup.valid"
+          (click)="singupManager()"
+          type="submit"
+        >
+          Signup
+        </button>
+      </div>
+    </form>
+    <a routerLink="/">Login here</a>
+  </div>
+</div>

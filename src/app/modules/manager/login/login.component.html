@@ -1,1 +1,44 @@
-<p>login works!</p>
+<div class="login_container">
+  <div class="login_content">
+    <form style="width: 100%" [formGroup]="formGroup">
+      <div class="form_heading">
+        <p>Login Here</p>
+      </div>
+      <div class="login_email mb-3">
+        <label for="email">Email</label>
+        <input type="email" formControlName="email" />
+        <span
+          style="color: red"
+          *ngIf="
+            formGroup.get('email')!.hasError('required') &&
+            formGroup.get('email')!.touched
+          "
+          >Email is required</span
+        >
+      </div>
+      <div class="login_password">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" />
+        <span
+          style="color: red"
+          *ngIf="
+            formGroup.get('password')!.hasError('required') &&
+            formGroup.get('password')!.touched
+          "
+          >Password is required</span
+        >
+      </div>
+      <div class="login_btn my-3">
+        <button
+          class="custome_btn"
+          [disabled]="!formGroup.valid"
+          (click)="loginManager()"
+          type="submit"
+        >
+          Login
+        </button>
+      </div>
+    </form>
+    <a routerLink="/signup">Signup here</a>
+  </div>
+</div>

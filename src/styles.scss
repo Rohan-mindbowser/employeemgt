@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import "src/variable.scss";
+
+.custome_btn{
+    padding: 0px 14px;
+    background: $main-bg-color;
+    color: white;
+    border-radius: 5px;
+    width: 130px;
+    transition: 0.5s all ease;
+}
+.custome_btn:hover{
+    letter-spacing: 4px;
+}
