@@ -15,6 +15,17 @@ export class EmployelistComponent implements OnInit {
   formGroup!: FormGroup;
   employeeLsitArray!: any;
 
+  // updateFormGroup!: FormGroup;
+
+  singleEmployee!: any;
+
+  firstname: string = '';
+  lastname: string = '';
+  address: string = '';
+  dob!: any;
+  mobile: number = 0;
+  empID: any;
+
   constructor(
     private _authService: AuthService,
     private activatedRoute: ActivatedRoute,
@@ -105,6 +116,61 @@ export class EmployelistComponent implements OnInit {
         });
 
         Swal.fire('Deleted!', 'Employee Deleted successfuly', 'success');
+      }
+    });
+  }
+
+  updateFormGroup = new FormGroup({
+    updated_firstname: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[a-zA-Z ]*'),
+    ]),
+    updated_lastname: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[a-zA-Z ]*'),
+    ]),
+    updated_dob: new FormControl('', [Validators.required]),
+    updated_mobile: new FormControl('', [Validators.required]),
+    updated_address: new FormControl('', [Validators.required]),
+  });
+
+  //get single employee
+  getSingleEmployee(id: any) {
+    this._apiService.getSingleEmployee(id).subscribe((employee) => {
+      if (employee) {
+        this.singleEmployee = JSON.parse(employee);
+        this.updateFormGroup.patchValue({
+          updated_firstname: this.singleEmployee.firstname,
+          updated_lastname: this.singleEmployee.lastname,
+          updated_dob: this.singleEmployee.dob,
+          updated_mobile: this.singleEmployee.mobile,
+          updated_address: this.singleEmployee.address,
+        });
+        console.log(this.singleEmployee.firstname);
+      }
+    });
+  }
+
+  updateEmployee() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, update it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._apiService
+          .updateEmployee(this.singleEmployee._id, this.updateFormGroup.value)
+          .subscribe((res) => {
+            if (res) {
+              this.getEmployeeList();
+              this.updateFormGroup.reset();
+            }
+          });
+        Swal.fire('Updated!', 'Employee Updated successfuly', 'success');
       }
     });
   }

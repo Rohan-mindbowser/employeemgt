@@ -35,9 +35,28 @@ export class ApiService {
     return this.http.get(`${baseUrl}/api/manager/getemployees`);
   }
 
+  //delete employee
   deleteEmployee(id: any): Observable<any> {
     return this.http.delete(`${baseUrl}/api/manager/deleteemployee/?id=${id}`, {
       responseType: 'text',
     });
+  }
+
+  //get single employee
+  getSingleEmployee(id: any): Observable<any> {
+    return this.http.get(`${baseUrl}/api/manager/singleemployee/?id=${id}`, {
+      responseType: 'text',
+    });
+  }
+
+  //update employee details
+  updateEmployee(id: any, data: any): Observable<any> {
+    return this.http.patch(
+      `${baseUrl}/api/manager/updateemployee/?id=${id}`,
+      data,
+      {
+        responseType: 'text',
+      }
+    );
   }
 }
