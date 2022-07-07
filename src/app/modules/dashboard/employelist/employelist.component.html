@@ -1,0 +1,170 @@
+<div class="header px-3">
+  <div class="logo">
+    <p>Employee Management</p>
+  </div>
+  <div class="header_btns">
+    <button
+      class="add_btn"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasRight"
+      aria-controls="offcanvasRight"
+    >
+      Add Employee
+    </button>
+    <button (click)="logout()" class="logout_btn">Logout</button>
+  </div>
+</div>
+
+<!-- Table -->
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">EmpID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Date of Birth</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employeeLsitArray; index as i">
+        <th scope="row">{{ employee.empId }}</th>
+        <td>{{ employee.firstname }}</td>
+        <td>{{ employee.lastname }}</td>
+        <td>{{ employee.address }}</td>
+        <td>{{ employee.dob | date }}</td>
+        <td>{{ employee.mobile }}</td>
+        <td>
+          <i (click)="deleteEmployee(employee._id)" class="fa-solid fa-trash-can me-3"></i
+          ><i class="fa-solid fa-pen-to-square"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Table ends here  -->
+
+<!-- Right canvas  -->
+<div
+  class="offcanvas offcanvas-end"
+  tabindex="-1"
+  id="offcanvasRight"
+  aria-labelledby="offcanvasRightLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">
+      Enter Employee Details
+    </h5>
+    <button type="button" class="custome_btn" data-bs-dismiss="offcanvas">
+      Close
+    </button>
+  </div>
+  <div class="offcanvas-body">
+    <form [formGroup]="formGroup">
+      <div class="mb-3">
+        <label for="firstname" class="form-label">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstname"
+          aria-describedby="emailHelp"
+          formControlName="firstname"
+        />
+        <span
+          style="color: red"
+          *ngIf="
+            formGroup.get('firstname')!.hasError('required') &&
+            formGroup.get('firstname')!.touched
+          "
+          >Firstname is required</span
+        >
+        <span
+          style="color: red"
+          *ngIf="formGroup.get('firstname')!.hasError('pattern')"
+          >Name must contain only alphabetics characters</span
+        >
+      </div>
+      <div class="mb-3">
+        <label for="lastname" class="form-label">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastname"
+          formControlName="lastname"
+        />
+        <span
+          style="color: red"
+          *ngIf="
+            formGroup.get('lastname')!.hasError('required') &&
+            formGroup.get('lastname')!.touched
+          "
+          >Lastname is required</span
+        >
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          formControlName="address"
+        />
+        <span
+          style="color: red"
+          *ngIf="
+            formGroup.get('address')!.hasError('required') &&
+            formGroup.get('address')!.touched
+          "
+          >Address is required</span
+        >
+      </div>
+      <div class="mb-3">
+        <label for="dob" class="form-label">Date of birth</label>
+        <input
+          type="date"
+          class="form-control"
+          id="dob"
+          formControlName="dob"
+        />
+        <span
+          style="color: red"
+          *ngIf="
+            formGroup.get('dob')!.hasError('required') &&
+            formGroup.get('dob')!.touched
+          "
+          >Dob is required</span
+        >
+      </div>
+      <div class="mb-5">
+        <label for="mobile" class="form-label">Phone Number</label>
+        <input
+          type="number"
+          class="form-control"
+          id="mobile"
+          formControlName="mobile"
+        />
+        <span
+          style="color: red"
+          *ngIf="
+            formGroup.get('mobile')!.hasError('required') &&
+            formGroup.get('mobile')!.touched
+          "
+          >Mobile is required</span
+        >
+      </div>
+      <button
+        type="submit"
+        [disabled]="!formGroup.valid"
+        (click)="addEmployee()"
+        class="custome_btn"
+        data-bs-dismiss="offcanvas"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>

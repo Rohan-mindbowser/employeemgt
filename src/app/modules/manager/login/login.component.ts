@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgToastService } from 'ng-angular-popup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _apiService: ApiService,
     private _authService: AuthService,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -28,10 +30,12 @@ export class LoginComponent implements OnInit {
   }
   loginManager() {
     this._apiService.login(this.formGroup.value).subscribe(
-      (accessToken) => {
-        if (accessToken) {
-          alert(accessToken);
-          this._authService.setAccessToken(accessToken);
+      (data) => {
+        if (data) {
+          let parsed_data = JSON.parse(data);
+          let manager_id = parsed_data[1];
+          this._authService.setAccessToken(parsed_data[0]);
+          this.router.navigate([`dashboard/${manager_id}`]);
           this.formGroup.reset();
         }
       },

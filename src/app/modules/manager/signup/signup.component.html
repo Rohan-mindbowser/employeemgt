@@ -16,6 +16,13 @@
             "
             >Firstname is required</span
           >
+          <span
+            style="color: red"
+            *ngIf="
+              formGroup.get('firstname')!.hasError('pattern')
+            "
+            >Name must contain only alphabetics characters</span
+          >
         </div>
         <div class="form_field mb-3">
           <label for="lastname">Last Name</label>
@@ -40,6 +47,13 @@
             "
             >Email is required</span
           >
+          <span
+          style="color: red"
+          *ngIf="
+            formGroup.get('email')!.hasError('pattern')
+          "
+          >Email Not Valid</span
+        >
         </div>
         <div class="form_field mb-3">
           <label for="firstname">Password</label>
@@ -101,6 +115,6 @@
         </button>
       </div>
     </form>
-    <a routerLink="/">Login here</a>
+    <a routerLink="/">Have an Account? Login here</a>
   </div>
 </div>

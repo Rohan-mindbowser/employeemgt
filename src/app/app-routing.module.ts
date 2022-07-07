@@ -9,6 +9,10 @@ const routes: Routes = [
     pathMatch: 'full',
     component: LoginComponent,
   },
+  {
+    path: '**',
+    component: LoginComponent,
+  },
 ];
 
 @NgModule({
