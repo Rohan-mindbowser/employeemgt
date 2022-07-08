@@ -8,6 +8,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  z-index: 99;
+}
+.main {
+  padding-top: 5rem;
 }
 .logo p {
   font-size: 30px;
@@ -51,9 +56,60 @@
   background: $main-bg-color;
   color: white;
 }
-.btn-white{
-    color: white !important;
+.btn-white {
+  color: white !important;
 }
-.fa-trash-can{
+.fa-trash-can {
   color: red;
 }
+
+.employee_card_list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  min-height: 80vh;
+}
+.employee_card {
+  width: 30%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e0f7ff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+.employe_name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.employee_actions {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+.employee_id p {
+  margin: 0;
+  font-weight: bold;
+}
+@media screen and (max-width: 900px) {
+  .employee_card {
+    width: 40%;
+  }
+  .custome_btn {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 568px) {
+  .employee_card {
+    width: 100%;
+  }
+  .custome_btn {
+    width: 100%;
+  }
+}
+

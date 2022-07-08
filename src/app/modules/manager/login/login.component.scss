@@ -1,4 +1,7 @@
 @import "src/variable.scss";
+p{
+  margin: 0;
+}
 
 @mixin center {
   display: flex;

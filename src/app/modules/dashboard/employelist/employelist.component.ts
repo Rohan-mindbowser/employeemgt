@@ -31,7 +31,7 @@ export class EmployelistComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private _apiService: ApiService,
     private toast: NgToastService,
-    private route:Router
+    private route: Router
   ) {}
   manager_id!: any;
   ngOnInit(): void {
@@ -63,6 +63,11 @@ export class EmployelistComponent implements OnInit {
 
   //Adding employee in DB
   addEmployee() {
+    this.manager_id = this.activatedRoute.snapshot.params['id'];
+    console.log(this.manager_id);
+    this.formGroup.patchValue({
+      createdby: this.manager_id,
+    });
     this._apiService.addEmployee(this.formGroup.value).subscribe(
       (res) => {
         if (res) {
@@ -91,20 +96,22 @@ export class EmployelistComponent implements OnInit {
 
   //get all employees
   getEmployeeList() {
-    this._apiService.getAllEmployees(this.manager_id).subscribe((employees) => {
-      if (employees) {
-        this.employeeLsitArray = employees;
+    this._apiService.getAllEmployees(this.manager_id).subscribe(
+      (employees) => {
+        if (employees) {
+          this.employeeLsitArray = employees;
+        }
+      },
+      (err) => {
+        if (err) {
+          this.toast.error({
+            detail: 'Server Failed',
+            duration: 5000,
+          });
+          this.route.navigate(['']);
+        }
       }
-    },(err)=>{
-      if(err){
-        console.log(err)
-        this.toast.error({
-          detail: 'Server Failed',
-          duration: 5000,
-        });
-        this.route.navigate([""])
-      }
-    });
+    );
   }
 
   //Delete Employee
@@ -130,6 +137,7 @@ export class EmployelistComponent implements OnInit {
     });
   }
 
+  //Update data form
   updateFormGroup = new FormGroup({
     updated_firstname: new FormControl('', [
       Validators.required,
@@ -156,11 +164,11 @@ export class EmployelistComponent implements OnInit {
           updated_mobile: this.singleEmployee.mobile,
           updated_address: this.singleEmployee.address,
         });
-        console.log(this.singleEmployee.firstname);
       }
     });
   }
 
+  //update employee details function
   updateEmployee() {
     Swal.fire({
       title: 'Are you sure?',

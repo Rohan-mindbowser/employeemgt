@@ -16,8 +16,8 @@
 </div>
 
 <!-- Table -->
-<div class="container">
-  <table class="table table-striped">
+<div class="container main">
+  <!-- <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">EmpID</th>
@@ -52,7 +52,41 @@
         </td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
+
+  <div class="employee_card_list">
+    <div
+      class="employee_card mb-3"
+      *ngFor="let employee of employeeLsitArray; index as i"
+    >
+      <div class="employee_profile_img">
+        <img style="width: 100px" src="assets/img/user.png" alt="" />
+      </div>
+      <div class="employee_id my-2">
+        <p>EmpId : {{ employee.empId }}</p>
+      </div>
+      <div class="employe_name">
+        <p>Name: {{ employee.firstname }} {{ employee.lastname }}</p>
+      </div>
+      <div class="employee_actions">
+        <div class="employee_delete">
+          <button (click)="deleteEmployee(employee._id)" class="custome_btn">
+            Delete
+          </button>
+        </div>
+        <div class="employee_edit">
+          <button
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+            (click)="getSingleEmployee(employee._id)"
+            class="custome_btn"
+          >
+            Edit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Table ends here  -->
@@ -149,7 +183,7 @@
         >
       </div>
       <div class="mb-5">
-        <label for="mobile"  class="form-label">Phone Number</label>
+        <label for="mobile" class="form-label">Phone Number</label>
         <input
           type="number"
           class="form-control"
