@@ -149,12 +149,13 @@
         >
       </div>
       <div class="mb-5">
-        <label for="mobile" class="form-label">Phone Number</label>
+        <label for="mobile"  class="form-label">Phone Number</label>
         <input
           type="number"
           class="form-control"
           id="mobile"
           formControlName="mobile"
+          maxlength="10"
         />
         <span
           style="color: red"
@@ -299,7 +300,9 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="updateEmployee()" class="custome_btn">Update</button>
+        <button type="button" (click)="updateEmployee()" class="custome_btn">
+          Update
+        </button>
       </div>
     </div>
   </div>

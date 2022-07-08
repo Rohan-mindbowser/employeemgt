@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
@@ -30,7 +30,8 @@ export class EmployelistComponent implements OnInit {
     private _authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private _apiService: ApiService,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private route:Router
   ) {}
   manager_id!: any;
   ngOnInit(): void {
@@ -90,9 +91,18 @@ export class EmployelistComponent implements OnInit {
 
   //get all employees
   getEmployeeList() {
-    this._apiService.getAllEmployees().subscribe((employees) => {
+    this._apiService.getAllEmployees(this.manager_id).subscribe((employees) => {
       if (employees) {
         this.employeeLsitArray = employees;
+      }
+    },(err)=>{
+      if(err){
+        console.log(err)
+        this.toast.error({
+          detail: 'Server Failed',
+          duration: 5000,
+        });
+        this.route.navigate([""])
       }
     });
   }

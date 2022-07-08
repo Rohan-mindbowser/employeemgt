@@ -31,8 +31,8 @@ export class ApiService {
   }
 
   //get all employees lis
-  getAllEmployees(): Observable<any> {
-    return this.http.get(`${baseUrl}/api/manager/getemployees`);
+  getAllEmployees(m_id:any): Observable<any> {
+    return this.http.get(`${baseUrl}/api/manager/getemployees/?m_id=${m_id}`);
   }
 
   //delete employee

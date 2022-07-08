@@ -5,7 +5,9 @@
   justify-content: center;
   align-items: center;
 }
-
+span {
+  font-size: 20px;
+}
 .signup_container {
   width: 100vw;
   height: 100vh;
@@ -23,45 +25,49 @@
   background-color: white;
   color: black;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  @include center(); 
+  @include center();
 }
-.signup_email{
-    display: flex;
-    flex-direction: column;
+.signup_email {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.signup_password {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.form_heading p {
+  background: $main-bg-color;
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+}
+.signup_content a {
+  text-align: left;
+  width: 100%;
+  text-decoration: none;
+}
+.form_container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
+.form_field {
+  width: 45%;
+}
+.form_field_content {
+  display: flex;
+  flex-direction: column;
+}
+.form_field input {
+  width: 100%;
+}
+@media screen and (max-width: 768px) {
+  .signup_content {
     width: 100%;
-}
-.signup_password{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-.form_heading p{
-    background: $main-bg-color;
-    font-size: 40px;
-    color: white;
-    text-align: center;
-    border-radius: 5px;
-}
-.signup_content a{
-    text-align: left;
-    width: 100%;
-    text-decoration: none;
-}
-.form_container{
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    align-items: center;
-}
-.form_field{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-.form_field input{
-    width: 340px;
-}
-@media screen and (max-width:768px) {
-    .signup_content {
-        width: 100%;}
+  }
 }

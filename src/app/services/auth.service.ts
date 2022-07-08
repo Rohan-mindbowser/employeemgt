@@ -13,6 +13,9 @@ export class AuthService {
   isLoggedIn() {
     return !!localStorage.getItem('JWT_TOKEN');
   }
+  getToken() {
+    return localStorage.getItem('JWT_TOKEN');
+  }
   removeAccessToken() {
     localStorage.removeItem('JWT_TOKEN');
     this.router.navigate(['']);
