@@ -33,9 +33,10 @@ export class LoginComponent implements OnInit {
       (data) => {
         if (data) {
           let parsed_data = JSON.parse(data);
-          let manager_id = parsed_data[1];
-          this._authService.setAccessToken(parsed_data[0]);
-          this.router.navigate([`dashboard/${manager_id}`]);
+          let manager_id = parsed_data.m_id;
+          this._authService.setAccessToken(parsed_data.accessToken);
+          this._authService.setRefreshToken(parsed_data.refreshToken);
+          this.router.navigate([`dashboard/${parsed_data.m_id}`]);
           this.formGroup.reset();
         }
       },

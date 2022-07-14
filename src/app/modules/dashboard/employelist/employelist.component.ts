@@ -41,6 +41,7 @@ export class EmployelistComponent implements OnInit {
   }
 
   logout() {
+    this._authService.removeRefreshToken();
     this._authService.removeAccessToken();
   }
   //Creating form
@@ -102,15 +103,15 @@ export class EmployelistComponent implements OnInit {
           this.employeeLsitArray = employees;
         }
       },
-      (err) => {
-        if (err) {
-          this.toast.error({
-            detail: 'Server Failed',
-            duration: 5000,
-          });
-          this.route.navigate(['']);
-        }
-      }
+      // (err) => {
+      //   if (err) {
+          // this.toast.error({
+          //   detail: 'Please Login Again',
+          //   duration: 5000,
+          // });
+      //     this.route.navigate(['']);
+      //   }
+      // }
     );
   }
 
@@ -119,7 +120,6 @@ export class EmployelistComponent implements OnInit {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',

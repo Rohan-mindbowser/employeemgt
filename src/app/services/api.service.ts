@@ -31,7 +31,7 @@ export class ApiService {
   }
 
   //get all employees lis
-  getAllEmployees(m_id:any): Observable<any> {
+  getAllEmployees(m_id: any): Observable<any> {
     return this.http.get(`${baseUrl}/api/manager/getemployees/?m_id=${m_id}`);
   }
 
@@ -59,4 +59,10 @@ export class ApiService {
       }
     );
   }
+
+  // getNewTokens() {
+  //   return this.http.post(`${baseUrl}/api/manager/refreshtoken`, {
+  //     refreshToken: localStorage.getItem('refreshToken'),
+  //   });
+  // }
 }
